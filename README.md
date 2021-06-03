@@ -1,6 +1,6 @@
 # vuetify-todo
 
-![Vuetify-todo](https://user-images.githubusercontent.com/52779920/120686862-1aea9e00-c4aa-11eb-8e9d-2a7348fbdb4c.gif)
+![Vuetify-todo](https://user-images.githubusercontent.com/52779920/120687407-ab28e300-c4aa-11eb-9fa2-ff34cf848795.gif)
 
 ## App Features ✨
 
