@@ -1,7 +1,12 @@
 # vuetify-todo
 
-https://user-images.githubusercontent.com/52779920/120686649-e1b22e00-c4a9-11eb-893e-ea29239ead3d.mp4
+![Vuetify-todo](https://user-images.githubusercontent.com/52779920/120686862-1aea9e00-c4aa-11eb-8e9d-2a7348fbdb4c.gif)
 
+## App Features ✨
+
+- V-model to search
+- Mobile responsive
+- Split components
 
 ## Project setup
 ```
