@@ -1,5 +1,13 @@
 <template>
-  <div class="home ">
+    <v-container>
+  <v-row align="center"
+      justify="center"
+      class="mt-1">
+      <v-col cols="12"
+        md="6"
+        lg="8" style="background-color:#f9f9f9;">
+  <div class="home justify-center" >
+    
     <v-text-field
       outlined
       v-model="newTaskTitle"
@@ -38,6 +46,9 @@
       </div>
     </v-list>
   </div>
+  </v-col>
+  </v-row>
+</v-container>
 </template>
 
 <script>

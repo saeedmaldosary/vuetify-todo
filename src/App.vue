@@ -74,7 +74,7 @@
 <script>
 export default {
   data: () => ({
-    drawer: null,
+    drawer: false,
     searchClosed: true,
     search: "",
     items: [
