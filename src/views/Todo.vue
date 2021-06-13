@@ -3,45 +3,19 @@
     <v-row align="center" justify="center" class="mt-1">
       <v-col cols="12" md="6" lg="8" style="background-color:#f9f9f9;">
         <div class="home justify-center">
+          <v-row class="my-1" align="center">
+            <strong class="mx-6 info--text text--darken-2 font-weight-light">
+              Remaining: {{ remainingTasks }}
+            </strong>
 
+            <v-divider vertical></v-divider>
 
-      <!--  -->
-      <!--  -->
-      <!--  -->
-      <!--  -->
-      <!--  -->
-      <!--  -->
-      <!--  -->
-      <!--  -->
-      
-       
+            <strong class="mx-4 success--text text--darken-2 font-weight-light">
+              Completed: {{ completedTasks }}
+            </strong>
 
-
-    <v-row
-      class="my-1"
-      align="center"
-    >
-      <strong class="mx-6 info--text text--darken-2 font-weight-light">
-        Remaining: {{ remainingTasks }}
-      </strong>
-
-      <v-divider vertical></v-divider>
-
-      <strong class="mx-4 success--text text--darken-2 font-weight-light">
-        Completed: {{ completedTasks }}
-      </strong>
-
-      <v-spacer></v-spacer>
-      </v-row>
-
-      <!--  -->
-      <!--  -->
-      <!--  -->
-      <!--  -->
-      <!--  -->
-      <!--  -->
-      <!--  -->
-      <!--  -->
+            <v-spacer></v-spacer>
+          </v-row>
           <v-text-field
             outlined
             v-model="newTaskTitle"
@@ -124,15 +98,14 @@ export default {
       return this.tasks.filter((task) => {
         return task.title.match(this.search);
       });
-      
     },
-       completedTasks () {
-        return this.tasks.filter(task => task.done).length
-      },
-     
-      remainingTasks () {
-        return this.tasks.length - this.completedTasks
-      },
+    completedTasks() {
+      return this.tasks.filter((task) => task.done).length;
+    },
+
+    remainingTasks() {
+      return this.tasks.length - this.completedTasks;
+    },
   },
   methods: {
     doneTask(id) {
@@ -153,8 +126,6 @@ export default {
         this.newTaskTitle = "";
       }
     },
-
-
   },
 };
 </script>
