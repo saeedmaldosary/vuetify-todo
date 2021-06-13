@@ -8,6 +8,14 @@
 - Mobile responsive
 - Split components
 
+### New feature added
+
+- Counter for completed and remaining tasks
+- Center Todo component in desktop and mobile 
+
+![image](https://user-images.githubusercontent.com/52779920/121802447-ebbff380-cc44-11eb-8955-6cd41449b78e.png)
+
+
 ## Project setup
 ```
 npm install
