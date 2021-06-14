@@ -10,10 +10,11 @@
 
 ### New feature added
 
-- Counter for completed and remaining tasks
+- Adding progress linear for completed and remaining tasks
 - Center Todo component in desktop and mobile 
+- Adding snackbar to inform user his actions
 
-![image](https://user-images.githubusercontent.com/52779920/121802447-ebbff380-cc44-11eb-8955-6cd41449b78e.png)
+![image](https://user-images.githubusercontent.com/52779920/121878585-918e6380-cd14-11eb-9391-af5c4751b273.png)
 
 
 ## Project setup
