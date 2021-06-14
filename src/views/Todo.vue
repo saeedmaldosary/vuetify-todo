@@ -1,21 +1,77 @@
 <template>
   <v-container>
-    <v-row align="center" justify="center" class="mt-1">
-      <v-col cols="12" md="6" lg="8" style="background-color:#f9f9f9;">
+    <v-row align="center" justify="center" >
+      <v-col cols="12" md="6" lg="8">
         <div class="home justify-center">
-          <v-row class="my-1" align="center">
-            <strong class="mx-6 info--text text--darken-2 font-weight-light">
-              Remaining: {{ remainingTasks }}
-            </strong>
-
+          <!-- progress-circular -->
+          <!-- <div class="text-center">
+            <v-text-field value="completedTasks" readonly></v-text-field>
+            <v-progress-circular
+              :rotate="-90"
+              :size="100"
+              :width="15"
+              class="mx-6"
+              :value="completedTasksProgress"
+              color="primary"
+            >
+              {{ completedTasks }}
+            </v-progress-circular>
             <v-divider vertical></v-divider>
+            <v-progress-circular
+              :rotate="-90"
+              :size="100"
+              :width="15"
+              class="mx-6"
+              :value="remainingTasksProgress"
+              color="teal"
+            >
+              {{ remainingTasks }}
+            </v-progress-circular>
+          </div> -->
+          <!-- End progress-circular -->
+          <!-- progress-linear -->
+          <template>
+            <v-container fluid>
+              <v-text-field
+                v-model="value"
+                color="cyan darken"
+                label="Remaining Tasks"
+                loading
+              >
+                <template v-slot:progress>
+                  <v-progress-linear
+                    :value="remainingTasksProgress"
+                    color="amber"
+                    absolute
+                    height="25"
+                  >
+                    <strong>{{ Math.ceil(remainingTasksProgress) }}%</strong>
+                  </v-progress-linear>
+                </template>
+              </v-text-field>
+              <v-text-field
+                v-model="value"
+                color="cyan darken"
+                label="Completed Tasks"
+                loading
+              >
+                <template v-slot:progress>
+                  <v-progress-linear
+                    :value="completedTasksProgress"
+                    color="green"
+                    absolute
+                    height="25"
+                  >
+                    <strong>{{ Math.ceil(completedTasksProgress) }}%</strong>
+                  </v-progress-linear>
+                </template>
+              </v-text-field>
+            </v-container>
+          </template>
 
-            <strong class="mx-4 success--text text--darken-2 font-weight-light">
-              Completed: {{ completedTasks }}
-            </strong>
+          <v-divider class="mx-5"></v-divider>
+          <!-- End progress-linear -->
 
-            <v-spacer></v-spacer>
-          </v-row>
           <v-text-field
             outlined
             v-model="newTaskTitle"
@@ -59,6 +115,15 @@
         </div>
       </v-col>
     </v-row>
+    <v-snackbar v-model="snackbar" :multi-line="multiLine">
+      {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -67,6 +132,12 @@ export default {
   name: "Home",
   data() {
     return {
+      interval: {},
+      value: "",
+      custom: true,
+      multiLine: true,
+      snackbar: false,
+      text: `I'm a multi-line snackbar.`,
       newTaskTitle: null,
       tasks: [
         {
@@ -87,6 +158,9 @@ export default {
       ],
     };
   },
+  beforeDestroy() {
+    clearInterval(this.interval);
+  },
   props: {
     search: {
       type: String,
@@ -102,28 +176,44 @@ export default {
     completedTasks() {
       return this.tasks.filter((task) => task.done).length;
     },
+    completedTasksProgress() {
+      return (100 / this.tasks.length) * this.completedTasks;
+    },
 
     remainingTasks() {
       return this.tasks.length - this.completedTasks;
     },
+    remainingTasksProgress() {
+      return 100 - (100 / this.tasks.length) * this.completedTasks;
+    },
   },
   methods: {
     doneTask(id) {
+      this.text = this.tasks.find((x) => x.id === id).title + " task is done";
+      this.snackbar = true;
       let task = this.tasks.filter((task) => task.id == id)[0];
       task.done = !task.done;
     },
     deleteTask(id) {
+      this.text =
+        this.tasks.find((x) => x.id === id).title + " task has been deleted";
+      this.snackbar = true;
       this.tasks = this.tasks.filter((task) => task.id !== id);
     },
     addTask() {
-      if (this.newTaskTitle != "") {
+      if (this.newTaskTitle) {
         let newTask = {
           id: Date.now(),
           title: this.newTaskTitle,
           done: false,
         };
+        this.snackbar = true;
+        this.text = this.newTaskTitle + " Task has been added";
         this.tasks.push(newTask);
         this.newTaskTitle = "";
+      } else {
+        this.snackbar = true;
+        this.text = "Enter a task to add it";
       }
     },
   },

@@ -47,9 +47,10 @@
           <v-spacer></v-spacer>
 
           <v-text-field
+            width="100"
             @focus="searchClosed = false"
             @blur="searchClosed = true"
-            class="searchInput mt-1"
+            class="searchInput shrink m-4 mt-2"
             v-model="search"
             :class="{ 'closed-d': searchClosed }"
             placeholder="Search"
@@ -79,7 +80,7 @@ export default {
     search: "",
     items: [
       { title: "Todo", icon: "mdi-format-list-checks", to: "/" },
-      { title: "About", icon: "mdi-image", to: "/About" },
+      { title: "About", icon: "mdi-information", to: "/About" },
     ],
   }),
 };
